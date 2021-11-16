@@ -4,9 +4,9 @@ from django.shortcuts import render
 from django.views import View
 
 
-class Login(View):
-    def get(self, request):
-        return render(request, 'login.html')
+# class Login(View):
+#     def get(self, request):
+#         return render(request, 'login.html')
 
 
 class LandingPage(View):
@@ -14,9 +14,9 @@ class LandingPage(View):
         return render(request, 'index.html')
 
 
-class Register(View):
-    def get(self, request):
-        return render(request, 'register.html')
+# class Register(View):
+#     def get(self, request):
+#         return render(request, 'register.html')
 
 
 class AddDonation(View):

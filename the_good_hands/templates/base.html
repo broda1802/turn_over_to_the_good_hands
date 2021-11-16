@@ -12,19 +12,20 @@
     <header {% block header %}{% endblock %}>
       <nav class="container container--70">
         <ul class="nav--actions">
-            {% if user == logged.user%} {# lub inna autoryzacja uzytkownika jak zalogowany to Witaj 'agata', i dropdown jak nie to zaloguj/zalozl konto narazie nie ma dzialajaocych widokow #}
+            {% if user.is_authenticated %}
              <li class="logged-user">
-            Witaj{{ Agata }}
+            Witaj {{ user.first_name }}
             <ul class="dropdown">
                 <li><a href="#">Profil</a></li>
                 <li><a href="#">{% block dropdown_link %}{% endblock %}</a></li>
-                <li><a href="#">Wyloguj</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
             </ul>
-            </li>
-            {% else %} {#  zmiana klas/href dla widoków login/register dlatego wyswietla je nieco inaczej, ale to tez sie da pzerobic#}
-          <li><a href="" class="btn btn--small btn--without-border">Zaloguj</a></li>
-          <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+             </li>
         </ul>
+            {% else %}
+                <li><a href="{% url 'accounts:login' %}" class="btn btn--small btn--without-border">Zaloguj</a></li>
+                <li><a href="{% url 'accounts:signup' %}" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+                </ul>
             {% endif %}
         <ul>
           <li><a href="index.html" class="btn btn--without-border active">Start</a></li>
