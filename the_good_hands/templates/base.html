@@ -32,14 +32,17 @@
           <li><a href="{% url 'landing_page' %}#steps" class="btn btn--without-border">O co chodzi?</a></li>
           <li><a href="{% url 'landing_page' %}#about-us" class="btn btn--without-border">O nas</a></li>
           <li><a href="{% url 'landing_page' %}#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            {% block index_gives %} {% endblock %}
+           {% block index_gives %} {% endblock %}
           <li><a href="{% url 'landing_page' %}#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
       </nav>
     {% block index_slogan %} {% endblock %}
     </header>
 
+    {% if user.is_authenticated %}
 {% block content %} {% endblock %}
+    {% endif %}
+
 {% block login %} {% endblock %}
 {% block register %} {% endblock %}
 

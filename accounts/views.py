@@ -18,32 +18,24 @@ def authenticate_user(email, password):
     else:
         if user.check_password(password):
             return user
-
     return None
 
 
 class Login(View):
-    template_name = 'login.html'
-
     def get(self, request):
-        return render(request, self.template_name)
+        return render(request, 'login.html')
 
     def post(self, request):
         email = request.POST['email']
         password = request.POST['password']
         user = authenticate_user(email, password)
-        context = {}
 
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'index.html', context)
-            else:
-                context['error_message'] = "user is not active"
-        else:
-            context['error_message'] = "email or password not correct"
+                return redirect('landing_page')
 
-        return render(request, self.template_name, context)
+        return render(request, 'login.html')
 
 
 class SignUpView(SuccessMessageMixin, CreateView):
