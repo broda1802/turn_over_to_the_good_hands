@@ -17,7 +17,10 @@
             Witaj {{ user.first_name }}
             <ul class="dropdown">
                 <li><a href="#">Profil</a></li>
-                <li><a href="#">{% block dropdown_link %}{% endblock %}</a></li>
+                {% if request.user.is_superuser %}
+                  <li><a href="{% url "admin:index" %}">Panel administracyjny</a></li>
+                {% endif %}
+                {% block dropdown_link %}{% endblock %}
                 <li><a href="{% url 'logout' %}">Wyloguj</a></li>
             </ul>
              </li>
