@@ -22,4 +22,6 @@ class LandingPage(View):
 
 class AddDonation(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'form.html', {'categories': Category.objects.all()})
+        return render(request, 'form.html', {'categories': Category.objects.all(),
+                                             'list': list(Institution.objects.all())
+                                             },)
