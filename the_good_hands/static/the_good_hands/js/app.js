@@ -256,12 +256,11 @@ document.addEventListener("DOMContentLoaded", function () {
         new FormSteps(form);
     }
 
-
+    const institutions = document.querySelectorAll('#institution');
     const nextButton = document.querySelector('button');
     nextButton.addEventListener("click", function () {
         const checked_categories = [];
         const categories = Array.from(document.querySelectorAll('#category'))
-        const institutions = document.querySelectorAll('#institution')
         categories.forEach(function (element) {
             if (element.checked) {
                 checked_categories.push(element.value)
@@ -274,4 +273,51 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
 
-});
+    const button_step_4 = document.querySelector('#button_4')
+    button_step_4.addEventListener("click", function () {
+        const bags = document.querySelector('#bags').value
+        switch (bags) {
+            case '1':
+                document.querySelector('#sum_bags').innerHTML = `${bags} worek`
+                break;
+            case '2':
+            case '3':
+            case '4':
+                document.querySelector('#sum_bags').innerHTML = `${bags} worki`
+                break;
+            default:
+                document.querySelector('#sum_bags').innerHTML = `${bags} worków`
+                break;
+        }
+
+        institutions.forEach(function (institution) {
+            if (institution.firstElementChild.firstElementChild.checked) {
+                switch (institution.getAttribute('data-type')) {
+                    case '1':
+                        document.querySelector('#sum_institutions').innerHTML = `Dla fundacji "${institution.getAttribute('data-name')}"`
+                        break
+                    case '2':
+                        document.querySelector('#sum_institutions').innerHTML = `Dla organizacji pozarządowej "${institution.getAttribute('data-name')}"`
+                        break
+                    case '3':
+                        document.querySelector('#sum_institutions').innerHTML = `Dla zbiórki lokalnej "${institution.getAttribute('data-name')}"`
+                        break
+                }
+            }
+        })
+
+        document.querySelector('#sum_address').innerHTML = `${document.querySelector('#address').value}`;
+        document.querySelector('#sum_city').innerHTML = `${document.querySelector('#city').value}`;
+        document.querySelector('#sum_postcode').innerHTML = `${document.querySelector('#postcode').value}`;
+        document.querySelector('#sum_phone').innerHTML = `${document.querySelector('#phone').value}`;
+        document.querySelector('#sum_data').innerHTML = `${document.querySelector('#data').value}`;
+        document.querySelector('#sum_time').innerHTML = `${document.querySelector('#time').value}`;
+        document.querySelector('#sum_more_info').innerHTML = `${document.querySelector('#more_info').value}`;
+
+    })
+    const submit = document.querySelector('#submit');
+    submit.addEventListener('click', function () {
+        document.querySelector('#form').submit();
+    });
+})
+
