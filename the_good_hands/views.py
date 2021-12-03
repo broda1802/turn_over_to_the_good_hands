@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
+
+from accounts.models import CustomUser
 from the_good_hands.models import Donation, Institution, Category
 
 
@@ -25,3 +27,8 @@ class AddDonation(LoginRequiredMixin, View):
         return render(request, 'form.html', {'categories': Category.objects.all(),
                                              'institutions': Institution.objects.all()
                                              },)
+
+
+class UserPage(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'profile.html', {'active_user': CustomUser.objects.filter(pk=request.user.id)})
