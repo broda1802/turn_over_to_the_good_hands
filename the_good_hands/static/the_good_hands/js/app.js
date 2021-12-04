@@ -315,8 +315,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector('#sum_more_info').innerHTML = `${document.querySelector('#more_info').value}`;
 
     })
-    const submit = document.querySelector('#submit');
-    submit.addEventListener('click', function () {
+    const submitBtn = document.querySelector('#submitBtn');
+    submitBtn.addEventListener('click', function () {
         document.querySelector('#form').submit();
     });
 })
