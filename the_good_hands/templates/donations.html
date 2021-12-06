@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}{% endblock %}
+{% block index_gives %} <li><a href="{% url "add_donation"%}" class="btn btn--without-border">Przekaż dary</a></li> {% endblock %}
+{% block index_slogan %}
+
+
+     <section id="stats" class="stats">
+      <div class="container container--85">
+        <div class="stats--item">
+          <h3>Nieodebrane:</h3>
+         <div class="title">
+          {% for donation in missed_donations %}
+              <p>Organizacja:{{ donation.institution }}</p>
+              <p>Ilość worków:{{ donation.quantity }}</p>
+              <p>Kategoria:{{ donation.categories.all|join:", " }}</p>
+              <p>Data przekazania: {{ donation.pick_up_date }}</p>
+              <p>Odebrana: {% if  not donation.is_taken %}Nie{% endif %}</p><br>
+               <label for="is_taken" class="subtitle">
+
+
+          {% endfor %}
+         </div>
+        </div>
+
+        <div class="stats--item">
+
+          <h3>Odebrane:</h3>
+        <div class="title">
+          {% for donation in received_donations %}
+              <p>Organizacja:{{ donation.institution }}</p>
+              <p>Ilość worków:{{ donation.quantity }}</p>
+              <p>Kategorie:{{ donation.categories.all|join:", " }}</p>
+              <p>Data przekazania: {{ donation.pick_up_date }}</p>
+              <p>Odebrana: {% if donation.is_taken %}Tak{% endif %}</p><br>
+          {% endfor %}
+        </div>
+        </div>
+
+        <div class="slogan--item" >
+        <div id="profile" style="margin-top: 170px;" >
+            <h1>Moje przekazane zbiórki</h1>
+        </div>
+        </div>
+
+      </div>
+    </section>
+
+
+{% endblock %}
