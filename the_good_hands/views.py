@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
+from django.db.models.functions import datetime
 from django.shortcuts import render
 
 # Create your views here.
@@ -52,3 +53,14 @@ class AddDonation(LoginRequiredMixin, View):
 class UserPage(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'profile.html', {'active_user': CustomUser.objects.filter(pk=request.user.id)})
+
+
+class DonationView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'donations.html', {
+            'received_donations': Donation.objects.filter(user=request.user.id).filter(is_taken=True).order_by(
+                'pick_up_date'),
+            'missed_donations': Donation.objects.filter(user=request.user.id).filter(is_taken=False).order_by(
+                '-pick_up_date')
+        })
+

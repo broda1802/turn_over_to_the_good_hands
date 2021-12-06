@@ -41,6 +41,7 @@ class Donation(models.Model):
     pick_up_time = models.TimeField()
     pick_up_comment = models.TextField(max_length=256)
     user = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL)
+    is_taken = models.BooleanField(default=False)
 
     def __str__(self):
         return self.city
