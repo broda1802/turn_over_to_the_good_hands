@@ -12,7 +12,8 @@
                     <ul style="list-style-type: none;">
                         <li> <input type="text" name="name" value="{{ u.first_name }}"/>Imię:</li>
                         <li> <input type="text" name="surname" value="{{ u.last_name }}"/>Nazwisko:</li>
-                        <li> <input type="text" name="email" value="{{ u.email }}"/>Email:</li>
+                        <li> <input type="text" name="email" value="{{ u.email }}"/>Email:</li><br>
+                        <li> <a type="button" href="{% url  'change_password' %}">Zmień hasło</a></li>
                     </ul>
                 {% endfor %}
              </div>
