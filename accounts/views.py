@@ -2,11 +2,12 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, TemplateView
+from django.utils.translation import gettext_lazy as _
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordContextMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -61,9 +62,14 @@ class UserUpdateView(SuccessMessageMixin, UpdateView):
 
 
 class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('password_change_done')
     template_name = 'change_password.html'
     success_message = 'Password changed.'
+
+
+class PasswordChangeDoneView(PasswordContextMixin, TemplateView):
+    template_name = 'password_change_done.html'
+    title = _('Hasło zmienione pomyślnie')
 
 
 class UserPasswordResetView(SuccessMessageMixin, PasswordResetView):

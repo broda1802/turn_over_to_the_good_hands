@@ -20,7 +20,6 @@ from the_good_hands.views import LandingPage, AddDonation, UserPage, DonationVie
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', UserPage.as_view(), name='user_page'),
     path('donations/', DonationView.as_view(), name="donations"),
     path('', LandingPage.as_view(), name='landing_page'),
